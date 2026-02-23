@@ -26,18 +26,14 @@ class MFButton
 public:
     MFButton();
     static void attachHandler(buttonEvent newHandler);
-    void        attach(uint8_t pin, const char *name);
+    void        attach(const char *name);
     void        detach();
     void        update();
-    void        trigger(uint8_t state);
-    void        triggerOnPress();
-    void        triggerOnRelease();
     void        setCommandMessenger(CmdMessenger *cmdMessengerNew);
 
 private:
     CmdMessenger *cmdMess;
     const char *_name;
-    uint8_t     _pin;
     bool        _initialized;
     bool        _state;
 

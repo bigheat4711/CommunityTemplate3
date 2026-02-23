@@ -19,9 +19,7 @@ namespace Button
     void handlerButtonOnChange(uint8_t eventId, const char *name)
     {
 #ifdef DEBUG2CMDMESSENGER
-        //String txt = "cgrau handlerButtonOnChange()): " + eventId;
-        //txt += " von: " + String(name);
-        cmdMessenger.sendCmd(   kDebug, String(name)); 
+        cmdMessenger.sendCmd(kDebug, String(name)); 
  #endif
 
         if (!getBoardReady())
@@ -41,13 +39,13 @@ namespace Button
         return true;
     }
 
-    void Add(uint8_t pin, char const *name)
+    void Add(char const *name)
     {
         if (buttonsRegistered == maxButtons)
             return;
         buttons[buttonsRegistered] = MFButton();
         buttons[buttonsRegistered].setCommandMessenger(&cmdMessenger);
-        buttons[buttonsRegistered].attach(pin, name);
+        buttons[buttonsRegistered].attach(name);
         MFButton::attachHandler(handlerButtonOnChange);
         buttonsRegistered++;
 #ifdef DEBUG2CMDMESSENGER
@@ -72,17 +70,6 @@ namespace Button
         buttons[0].update();
     }
 
-    void OnTrigger(void)
-    {
-        // Trigger all button release events first...
-        for (uint8_t i = 0; i < buttonsRegistered; i++) {
-            buttons[i].triggerOnRelease();
-        }
-        // ... then trigger all the press events
-        for (uint8_t i = 0; i < buttonsRegistered; i++) {
-            buttons[i].triggerOnPress();
-        }
-    }
 } // namespace button
 
 // Button.cpp

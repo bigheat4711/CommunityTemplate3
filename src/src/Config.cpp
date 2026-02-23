@@ -207,8 +207,8 @@ void readConfigFromMemory()
     do {
         switch (command) {
         case kTypeButton:
-            params[0] = readUint(&addrMem);                              
-            Button::Add(params[0], &nameBuffer[pNameBuffer]);                                          
+            readUint(&addrMem);//ignore button PIN
+            Button::Add(&nameBuffer[pNameBuffer]);                                          
             copy_success = readName(&addrMem, nameBuffer, &pNameBuffer); 
             break;
 

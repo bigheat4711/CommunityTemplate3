@@ -137,16 +137,6 @@ uint32_t getLastCommandMillis()
 
 void OnTrigger()
 {
-    Button::OnTrigger();
-#ifdef MF_INPUT_SHIFTER_SUPPORT
-    InputShifter::OnTrigger();
-#endif
-#ifdef MF_DIGIN_MUX_SUPPORT
-    DigInMux::OnTrigger();
-#endif
-#ifdef MF_ANALOG_SUPPORT
-    Analog::OnTrigger();
-#endif
     cmdMessenger.sendCmd(kRetriggerDone);
 }
 

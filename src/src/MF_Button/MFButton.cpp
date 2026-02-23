@@ -33,7 +33,7 @@ MFButton::MFButton()
     _initialized = false;
 }
 
-void MFButton::attach(uint8_t pin, const char *name)
+void MFButton::attach(const char *name)
 {
     //pinMode(6, INPUT_PULLUP);
     //pinMode(8, OUTPUT);
@@ -103,32 +103,6 @@ void MFButton::update()
         // B. Reihe deaktivieren (Wieder auf HIGH)
         // Wichtig, bevor wir zur nächsten Reihe gehen!
         digitalWrite(rowPins[r], HIGH);
-    }
-}
-
-void MFButton::trigger(uint8_t state)
-{
-    (state == LOW) ? triggerOnPress() : triggerOnRelease();
-}
-
-void MFButton::triggerOnPress()
-{
-    cmdMessenger.sendCmd(kDebug, F("cgrau triggerOnPress(): 0"));
-    if (!_initialized)
-        return;
-    cmdMessenger.sendCmd(kDebug, F("cgrau triggerOnPress(): 1"));
-    if (_inputHandler && _state == LOW) {
-        cmdMessenger.sendCmd(kDebug, F("cgrau triggerOnPress(): 2"));
-        (*_inputHandler)(btnOnPress, _name);
-    }
-}
-
-void MFButton::triggerOnRelease()
-{
-    if (!_initialized)
-        return;
-    if (_inputHandler && _state == HIGH) {
-        (*_inputHandler)(btnOnRelease, _name);
     }
 }
 

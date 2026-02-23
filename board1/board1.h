@@ -7,7 +7,7 @@ class board1
 public:
     board1();
     void begin();
-    void attach(char *init);
+    void attach();
     void detach();
     void set(int16_t messageID, char *setPoint);
     void update();

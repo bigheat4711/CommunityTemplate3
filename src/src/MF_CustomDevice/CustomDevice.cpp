@@ -94,25 +94,15 @@ namespace CustomDevice
     ********************************************************************************** */
     void OnSet()
     {
+
         int16_t device = cmdMessenger.readInt16Arg(); // get the device number
         if (device >= customDeviceRegistered)         // and do nothing if this device is not registered
             return;
         int16_t messageID = cmdMessenger.readInt16Arg();  // get the messageID number
         char   *output    = cmdMessenger.readStringArg(); // get the pointer to the new raw string
         cmdMessenger.unescape(output);                    // and unescape the string if escape characters are used
-#if defined(USE_2ND_CORE) && defined(ARDUINO_ARCH_RP2040)
-        // copy the message, could get be overwritten from the next message while processing on 2nd core
-        strncpy(payload, output, SERIAL_RX_BUFFER_SIZE);
-        // wait for 2nd core
-        rp2040.fifo.pop();
-        // Hmhm, how to get the function pointer to a function from class??
-        // rp2040.fifo.push((uintptr_t) &customDevice[device].set);
-        rp2040.fifo.push(device);
-        rp2040.fifo.push(messageID);
-        rp2040.fifo.push((uint32_t)&payload);
-#else
+
         customDevice[device].set(messageID, output); // send the string to your custom device
-#endif
     }
 
     /* **********************************************************************************

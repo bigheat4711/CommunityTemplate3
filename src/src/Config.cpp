@@ -22,7 +22,7 @@
 // --- DEIN STATISCHER CONFIG-STRING ---
 // Format: Typ.Pin(s).Name:  (Getrennt durch Punkte, Ende durch Doppelpunkt)
 // 4 = Encoder, 1 = Button, 10 = CustomDevice
-const char CustomDeviceConfig[] PROGMEM = "1.14.AP:1.15.FD:1.16.HDG:1.17.ALT:1.6.NAV:1.7.VNV:1.8.APR:1.9.BC:1.10.VS:1.11.UP:1.12.FLC:1.13.DN:17.board1.0..cgrau board1:8.2.3.0.Enc1:8.4.5.0.Enc2:";
+const char CustomDeviceConfig[] PROGMEM = "1.14.AP:1.15.FD:1.16.HDG:1.17.ALT:1.6.NAV:1.7.VNV:1.8.APR:1.9.BC:1.10.VS:1.11.UP:1.12.FLC:1.13.DN:17.board1.0.0.cgrau board1:8.2.3.0.Enc1:8.4.5.0.Enc2:";
 
 // The build version comes from an environment variable
 #define STRINGIZER(arg) #arg

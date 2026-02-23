@@ -3,7 +3,10 @@
   "AvrDudeSettings": {
     "Attempts": 1,
     "Device": "atmega328p",
-    "BaudRates": ["115200", "57600"],
+    "BaudRates": [
+      "115200",
+      "57600"
+    ],
     "Programmer": "arduino",
     "Timeout": 20000
   },
@@ -58,7 +61,7 @@
     "MaxShifters": 6,
     "MaxSteppers": 4,
     "MaxInputMultiplexer": 6,
-    "MaxCustomDevices": 0
+    "MaxCustomDevices": 1
   },
   "Pins": [
     {

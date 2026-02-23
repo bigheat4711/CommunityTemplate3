@@ -187,7 +187,7 @@ void readConfig()
 {
     // Hier wird deine Seriennummer sicher gesetzt
     strncpy(serial, "SN-D3E-D82", sizeof(serial));
-    strncpy(name, "cgrau board1 Nano", sizeof(name)); // Board-Name ebenfalls fixiert
+    strncpy(name, "cgrau board1", sizeof(name)); // Board-Name ebenfalls fixiert
     
     uint8_t numberDevices[kTypeMax] = {0};
     GetArraySizes(numberDevices);

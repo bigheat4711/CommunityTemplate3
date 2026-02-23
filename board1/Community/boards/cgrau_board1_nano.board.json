@@ -35,9 +35,9 @@
     "CanResetBoard": true,
     "FirmwareBaseName": "cgrau_board1_nano",
     "FirmwareExtension": "hex",
-    "FriendlyName": "cgrau board1 Nano",
+    "FriendlyName": "cgrau board1",
     "LatestFirmwareVersion": "0.0.1",
-    "MobiFlightType": "cgrau board1 Nano",
+    "MobiFlightType": "cgrau board1",
     "ResetFirmwareFile": "reset.arduino_uno_1_0_2.hex",
     "CustomDeviceTypes": [
       "board1"

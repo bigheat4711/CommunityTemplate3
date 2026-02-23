@@ -7,6 +7,7 @@
 #pragma once
 
 #include <Arduino.h>
+#include "commandmessenger.h"
 
 extern "C" {
 // callback functions always follow the signature: void cmd(void);
@@ -31,8 +32,10 @@ public:
     void        trigger(uint8_t state);
     void        triggerOnPress();
     void        triggerOnRelease();
+    void        setCommandMessenger(CmdMessenger *cmdMessengerNew);
 
 private:
+    CmdMessenger *cmdMess;
     const char *_name;
     uint8_t     _pin;
     bool        _initialized;

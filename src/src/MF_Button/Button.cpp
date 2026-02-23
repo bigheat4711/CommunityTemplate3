@@ -18,6 +18,12 @@ namespace Button
 
     void handlerButtonOnChange(uint8_t eventId, const char *name)
     {
+#ifdef DEBUG2CMDMESSENGER
+        //String txt = "cgrau handlerButtonOnChange()): " + eventId;
+        //txt += " von: " + String(name);
+        cmdMessenger.sendCmd(   kDebug, String(name)); 
+ #endif
+
         if (!getBoardReady())
             return;
         cmdMessenger.sendCmdStart(kButtonChange);
@@ -40,6 +46,7 @@ namespace Button
         if (buttonsRegistered == maxButtons)
             return;
         buttons[buttonsRegistered] = MFButton();
+        buttons[buttonsRegistered].setCommandMessenger(&cmdMessenger);
         buttons[buttonsRegistered].attach(pin, name);
         MFButton::attachHandler(handlerButtonOnChange);
         buttonsRegistered++;
@@ -62,7 +69,7 @@ namespace Button
     void read(void)
     {
         for (uint8_t i = 0; i < buttonsRegistered; i++) {
-            buttons[i].update();
+            buttons[i].update();//TODO man muss hier nicht alle buttons scannen, weil das update() die Button Matrix scant - jedes mal!
         }
     }
 

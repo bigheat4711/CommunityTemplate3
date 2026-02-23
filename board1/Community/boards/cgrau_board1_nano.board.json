@@ -37,8 +37,7 @@
     "MobiFlightType": "cgrau board1 Nano",
     "ResetFirmwareFile": "reset.arduino_uno_1_0_2.hex",
     "CustomDeviceTypes": [
-      "board1",
-      "board12"
+      "board1"
     ],
     "Community": {
       "Project": "Your Project",

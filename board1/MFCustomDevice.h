@@ -5,8 +5,7 @@
 
 // only one entry required if you have only one custom device
 enum {
-    MY_CUSTOM_DEVICE_1 = 1,
-    MY_CUSTOM_DEVICE_2
+    MY_CUSTOM_DEVICE_1 = 1
 };
 class MFCustomDevice
 {

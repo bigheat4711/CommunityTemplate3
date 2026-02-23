@@ -34,7 +34,7 @@ const char CustomDeviceConfig[] PROGMEM = "1.14.AP:1.15.FD:1.16.HDG:1.17.ALT:1.6
 MFEEPROM MFeeprom;
 
 const uint8_t MEM_OFFSET_NAME   = 0;
-const uint8_t MEM_LEN_NAME      = 48;
+const uint8_t MEM_LEN_NAME      = 13;
 const uint8_t MEM_OFFSET_SERIAL = MEM_OFFSET_NAME + MEM_LEN_NAME;
 const uint8_t MEM_LEN_SERIAL    = 11;
 const uint8_t MEM_OFFSET_CONFIG = MEM_OFFSET_NAME + MEM_LEN_NAME + MEM_LEN_SERIAL;
@@ -43,7 +43,6 @@ const uint8_t MEM_OFFSET_CONFIG = MEM_OFFSET_NAME + MEM_LEN_NAME + MEM_LEN_SERIA
 char serial[11]; 
 #endif
 char           name[MEM_LEN_NAME]              = MOBIFLIGHT_NAME;
-const int      MEM_LEN_CONFIG                  = MEMLEN_CONFIG;
 char           nameBuffer[MEMLEN_NAMES_BUFFER] = "";
 boolean        configActivated                 = false;
 uint16_t       pNameBuffer                     = 0;

@@ -1,15 +1,13 @@
 #include "board1.h"
-#include "Arduino.h"
-#include "allocateMem.h"
-#include "commandmessenger.h"
-#include <U8x8lib.h>
+#include <U8g2lib.h>
+#include <Wire.h>
 
-/* **********************************************************************************
-    This is just the basic code to set up your custom device.
-    Change/add your code as needed.
-********************************************************************************** */
+// Das u8g2 Objekt für SSD1309 via I2C erstellen (Page-Buffer '_1_' für minimalen RAM, 'R2' für 180° Drehung)
+U8G2_SSD1309_128X64_NONAME0_1_HW_I2C u8g2(U8G2_R2, /* reset=*/ U8X8_PIN_NONE);
 
-U8X8_SSD1309_128X64_NONAME0_HW_I2C u8x8(/* reset=*/ U8X8_PIN_NONE);
+// Variablen für unsere Anzeige-Werte im RAM
+char currentHdg[10] = "---";
+char currentAlt[15] = "-----";
 
 board1::board1()
 {
@@ -17,87 +15,73 @@ board1::board1()
 
 void board1::begin()
 {
-  u8x8.begin();
-  u8x8.setFlipMode(3); // Falls es wieder auf dem Kopf steht
-  u8x8.setFont(u8x8_font_chroma48medium8_r);
-  u8x8.clearLine(0);
-    u8x8.setCursor(0, 0);
-    u8x8.print( F("begin()"));
- _initialised=true;
+    u8g2.begin();
+
+    u8g2.firstPage();
+    do {
+        u8g2.setFont(u8g2_font_helvB08_tr);
+        u8g2.setCursor(0, 10);
+        u8g2.print(F("begin()"));
+    } while ( u8g2.nextPage() );
+
+    _initialised = true;
 }
 
 void board1::attach()
 {
-  u8x8.clearLine(0);
-    u8x8.setCursor(0, 0);
-    u8x8.print( F("attach()"));
+    u8g2.firstPage();
+    do {
+        u8g2.setFont(u8g2_font_helvB08_tr);
+        u8g2.setCursor(0, 10);
+        u8g2.print(F("attach()"));
+    } while ( u8g2.nextPage() );
 }
 
 void board1::detach()
 {
-  u8x8.clearLine(0);
-    u8x8.setCursor(0, 0);
-    u8x8.print( F("detach()"));
     if (!_initialised)
         return;
     _initialised = false;
+
+    u8g2.firstPage();
+    do {
+        u8g2.setFont(u8g2_font_helvB08_tr);
+        u8g2.setCursor(0, 10);
+        u8g2.print(F("detach()"));
+    } while ( u8g2.nextPage() );
 }
 
 void board1::set(int16_t messageID, char *setPoint)
 {
-    // 1. Zeile explizit löschen, damit der alte, lange Text verschwindet
-    u8x8.clearLine(0); 
-    
+    // Eingehende Werte speichern
+    if (messageID == 0) strncpy(currentHdg, setPoint, sizeof(currentHdg));
+    if (messageID == 1) strncpy(currentAlt, setPoint, sizeof(currentAlt));
 
-    u8x8.setCursor(0, 0);
-    /* **********************************************************************************
-        Each messageID has it's own value
-        check for the messageID and define what to do.
-        Important Remark!
-        MessageID == -2 will be send from the board when PowerSavingMode is set
-            Message will be "0" for leaving and "1" for entering PowerSavingMode
-        MessageID == -1 will be send from the connector when Connector stops running
-        Put in your code to enter this mode (e.g. clear a display)
+    u8g2.firstPage();
+    do {
+        // 1. "hdg" zentriert
+        u8g2.setFont(u8g2_font_helvB08_tr); 
+        int w = u8g2.getStrWidth("hdg");
+        u8g2.setCursor((128 - w) / 2, 10);
+        u8g2.print(F("hdg")); 
 
-    ********************************************************************************** */
-    int32_t  data = atoi(setPoint);
-    uint16_t output;
+        // 2. HDG Wert zentriert
+        u8g2.setFont(u8g2_font_helvB14_tr); 
+        w = u8g2.getStrWidth(currentHdg);
+        u8g2.setCursor((128 - w) / 2, 28);
+        u8g2.print(currentHdg); 
 
-    // do something according your messageID
-    switch (messageID) {
-    case -1:
-      u8x8.print(F("MF shutdown"));
-      break;
-        // tbd., get's called when Mobiflight shuts down
-    case -2:
-      u8x8.print(F("MF power save"));
-      break;
-        // tbd., get's called when PowerSavingMode is entered
-    case 0:
-        output = (uint16_t)data;
-        data   = output;
-        u8x8.setCursor(0, 0);
-        u8x8.print(data);
-        u8x8.setCursor(0, 1);
-        u8x8.print(setPoint);
-        break;
-    case 1:
-        /* code */
-        u8x8.print(F("1 - undefined"));
-        break;
-    case 2:
-        /* code */
-        u8x8.print(F("2 - undefined"));
-        break;
-    default:
-        u8x8.print(F("default - undefined"));
-        break;
-    }
-}
+        // 3. "alt" zentriert
+        u8g2.setFont(u8g2_font_helvB08_tr);
+        w = u8g2.getStrWidth("alt");
+        u8g2.setCursor((128 - w) / 2, 44);
+        u8g2.print(F("alt")); 
 
-void board1::update()
-{ 
-    // Do something which is required regulary
-    //u8x8.setCursor(0, 0);
-    //u8x8.print( F("update()"));
+        // 4. ALT Wert zentriert
+        u8g2.setFont(u8g2_font_helvB14_tr);
+        w = u8g2.getStrWidth(currentAlt);
+        u8g2.setCursor((128 - w) / 2, 62);
+        u8g2.print(currentAlt); 
+
+    } while ( u8g2.nextPage() );
 }

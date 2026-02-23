@@ -11,13 +11,13 @@ class MFCustomDevice
 {
 public:
     MFCustomDevice();
-    void attach(uint16_t adrPin, uint16_t adrType, uint16_t adrConfig, bool configFromFlash = false);
+    void attach(uint16_t adrPin, uint16_t adrType, uint16_t adrConfig);
     void detach();
     void update();
     void set(int16_t messageID, char *setPoint);
 
 private:
-    bool           getStringFromMem(uint16_t addreeprom, char *buffer, bool configFromFlash);
+    bool           getStringFromMem(uint16_t addreeprom, char *buffer);
     bool           _initialized = false;
     board1 *_mydevice;
     uint8_t        _pin1, _pin2, _pin3;

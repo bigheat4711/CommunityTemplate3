@@ -38,12 +38,12 @@ namespace CustomDevice
         return true;
     }
 
-    void Add(uint16_t adrPin, uint16_t adrType, uint16_t adrConfig, bool configFromFlash)
+    void Add(uint16_t adrPin, uint16_t adrType, uint16_t adrConfig)
     {
         if (customDeviceRegistered == maxCustomDevices)
             return;
         customDevice[customDeviceRegistered] = MFCustomDevice();
-        customDevice[customDeviceRegistered].attach(adrPin, adrType, adrConfig, configFromFlash);
+        customDevice[customDeviceRegistered].attach(adrPin, adrType, adrConfig);
         customDeviceRegistered++;
 #ifdef DEBUG2CMDMESSENGER
         cmdMessenger.sendCmd(kStatus, F("Added CustomDevice"));

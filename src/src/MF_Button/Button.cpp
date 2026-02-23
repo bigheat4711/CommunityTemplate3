@@ -68,9 +68,8 @@ namespace Button
 
     void read(void)
     {
-        for (uint8_t i = 0; i < buttonsRegistered; i++) {
-            buttons[i].update();//TODO man muss hier nicht alle buttons scannen, weil das update() die Button Matrix scant - jedes mal!
-        }
+        //man muss hier nicht alle buttons scannen, weil das update() die Button Matrix scant - jedes mal!
+        buttons[0].update();
     }
 
     void OnTrigger(void)

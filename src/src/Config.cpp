@@ -243,7 +243,7 @@ void readConfigFromMemory()
             uint16_t adrConfig = addrMem; 
             copy_success       = readEndCommand(&addrMem, '.');
             if (copy_success) {
-                CustomDevice::Add(adrPin, adrType, adrConfig, true);
+                CustomDevice::Add(adrPin, adrType, adrConfig);
                 copy_success = readEndCommand(&addrMem, ':'); 
             }
             break;

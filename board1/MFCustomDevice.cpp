@@ -29,21 +29,15 @@ extern MFEEPROM MFeeprom;
 #define MEMLEN_STRING_BUFFER 40
 
 // reads a string from EEPROM or Flash at given address which is '.' terminated and saves it to the buffer
-bool MFCustomDevice::getStringFromMem(uint16_t addrMem, char *buffer, bool configFromFlash)
+bool MFCustomDevice::getStringFromMem(uint16_t addrMem, char *buffer)
 {
     char     temp     = 0;
     uint8_t  counter  = 0;
     uint16_t length   = MFeeprom.get_length();
     do {
-        if (configFromFlash) {
             temp = pgm_read_byte_near(CustomDeviceConfig + addrMem++);
             if (addrMem > sizeof(CustomDeviceConfig))
                 return false;
-        } else {
-            temp = MFeeprom.read_byte(addrMem++);
-            if (addrMem > length)
-                return false;
-        }
         buffer[counter++] = temp;              // save character and locate next buffer position
         if (counter >= MEMLEN_STRING_BUFFER) { // nameBuffer will be exceeded
             return false;                      // abort copying to buffer
@@ -67,7 +61,7 @@ MFCustomDevice::MFCustomDevice()
     will be called
 ********************************************************************************** */
 
-void MFCustomDevice::attach(uint16_t adrPin, uint16_t adrType, uint16_t adrConfig, bool configFromFlash)//TODO der letzte param ist konstant _true_
+void MFCustomDevice::attach(uint16_t adrPin, uint16_t adrType, uint16_t adrConfig)
 {
     if (adrPin == 0) return;
 
@@ -84,7 +78,7 @@ void MFCustomDevice::attach(uint16_t adrPin, uint16_t adrType, uint16_t adrConfi
         The string get's NOT stored as this would need a lot of RAM, instead a variable
         is used to store the type
     ********************************************************************************** */
-    getStringFromMem(adrType, parameter, configFromFlash);
+    getStringFromMem(adrType, parameter);
     if (strcmp(parameter, "board1") == 0)
         _customType = MY_CUSTOM_DEVICE_1;
 
@@ -101,7 +95,7 @@ void MFCustomDevice::attach(uint16_t adrPin, uint16_t adrType, uint16_t adrConfi
             Read the pins from the EEPROM or Flash, copy them into a buffer
             If you have set '"isI2C": true' in the device.json file, the first value is the I2C address
         ********************************************************************************************** */
-        getStringFromMem(adrPin, parameter, configFromFlash);
+        getStringFromMem(adrPin, parameter);
         /* **********************************************************************************************
             Split the pins up into single pins. As the number of pins could be different between
             multiple devices, it is done here.
@@ -116,7 +110,7 @@ void MFCustomDevice::attach(uint16_t adrPin, uint16_t adrType, uint16_t adrConfi
         /* **********************************************************************************
             Read the configuration from the EEPROM or Flash, copy it into a buffer.
         ********************************************************************************** */
-        getStringFromMem(adrConfig, parameter, configFromFlash);
+        getStringFromMem(adrConfig, parameter);
         /* **********************************************************************************
             Split the config up into single parameter. As the number of parameters could be
             different between multiple devices, it is done here.

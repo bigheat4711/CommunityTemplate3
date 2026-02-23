@@ -1,4 +1,4 @@
-#include "MyCustomClass.h"
+#include "board1.h"
 #include "allocateMem.h"
 #include "commandmessenger.h"
 
@@ -7,29 +7,29 @@
     Change/add your code as needed.
 ********************************************************************************** */
 
-MyCustomClass::MyCustomClass(uint8_t Pin1, uint8_t Pin2)
+board1::board1(uint8_t Pin1, uint8_t Pin2)
 {
     _pin1 = Pin1;
     _pin2 = Pin2;
 }
 
-void MyCustomClass::begin()
+void board1::begin()
 {
 }
 
-void MyCustomClass::attach(uint16_t Pin3, char *init)
+void board1::attach(uint16_t Pin3, char *init)
 {
     _pin3 = Pin3;
 }
 
-void MyCustomClass::detach()
+void board1::detach()
 {
     if (!_initialised)
         return;
     _initialised = false;
 }
 
-void MyCustomClass::set(int16_t messageID, char *setPoint)
+void board1::set(int16_t messageID, char *setPoint)
 {
     /* **********************************************************************************
         Each messageID has it's own value
@@ -65,7 +65,7 @@ void MyCustomClass::set(int16_t messageID, char *setPoint)
     }
 }
 
-void MyCustomClass::update()
+void board1::update()
 {
     // Do something which is required regulary
 }

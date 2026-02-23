@@ -1,9 +1,9 @@
 {
     "$schema": "./mfdevice.schema.json",
     "Info": {
-      "Label": "Mobiflight's template",
-      "Type": "MOBIFLIGHT_TEMPLATE",
-      "Author": "Mobiflight",
+      "Label": "cgrau's board1",
+      "Type": "board1",
+      "Author": "cgrau",
       "URL": "https://github.com",
       "Version" : "1.0.0"
     },

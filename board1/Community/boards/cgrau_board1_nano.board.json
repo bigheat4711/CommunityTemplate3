@@ -3,9 +3,9 @@
   "AvrDudeSettings": {
     "Attempts": 1,
     "Device": "atmega328p",
-    "BaudRates": ["115200"],
+    "BaudRates": ["115200", "57600"],
     "Programmer": "arduino",
-    "Timeout": 15000
+    "Timeout": 20000
   },
   "Connection": {
     "ConnectionDelay": 1750,
@@ -14,30 +14,31 @@
     "EEPROMSize": 286,
     "ExtraConnectionRetry": true,
     "ForceResetOnFirmwareUpdate": false,
-    "MessageSize": 64
+    "MessageSize": 64,
+    "TimeoutForFirmwareUpdate": 60000
   },
   "HardwareIds": [
-    "^VID_10C4&PID_EA60",
     "^VID_2341&PID_0043",
     "^VID_2A03&PID_0043",
     "^VID_2341&PID_0243",
     "^VID_2341&PID_0001",
     "^VID_1A86&PID_7523",
     "^VID_0403&PID_6001",
+    "^VID_067B&PID_2303",
     "^VID_0403\\+PID_6001\\+.+"
   ],
   "Info": {
     "CanInstallFirmware": true,
     "CanResetBoard": true,
-    "FirmwareBaseName": "mobiflight_template_uno",
+    "FirmwareBaseName": "cgrau_board1_nano",
     "FirmwareExtension": "hex",
-    "FriendlyName": "Mobiflight Template Uno",
+    "FriendlyName": "cgrau board1 Nano",
     "LatestFirmwareVersion": "0.0.1",
-    "MobiFlightType": "Mobiflight Template Uno",
+    "MobiFlightType": "cgrau board1 Nano",
     "ResetFirmwareFile": "reset.arduino_uno_1_0_2.hex",
     "CustomDeviceTypes": [
-      "MOBIFLIGHT_TEMPLATE",
-      "MOBIFLIGHT_TEMPLATE2"
+      "board1",
+      "board12"
     ],
     "Community": {
       "Project": "Your Project",
@@ -47,7 +48,7 @@
     }
   },
   "ModuleLimits": {
-    "MaxAnalogInputs": 6,
+    "MaxAnalogInputs": 8,
     "MaxButtons": 18,
     "MaxEncoders": 9,
     "MaxInputShifters": 6,
@@ -174,6 +175,20 @@
       "isPWM": false,
       "Name": "A5",
       "Pin": 19
+    },
+    {
+      "isAnalog": true,
+      "isI2C": false,
+      "isPWM": false,
+      "Name": "A6",
+      "Pin": 20
+    },
+    {
+      "isAnalog": true,
+      "isI2C": false,
+      "isPWM": false,
+      "Name": "A7",
+      "Pin": 21
     }
   ]
 }

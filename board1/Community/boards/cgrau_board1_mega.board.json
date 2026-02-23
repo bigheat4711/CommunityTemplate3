@@ -35,15 +35,15 @@
       "CanInstallFirmware": true,
       "CanResetBoard": true,
       "DelayAfterFirmwareUpdate": 0,
-      "FirmwareBaseName": "mobiflight_template_mega",
+      "FirmwareBaseName": "cgrau_board1_mega",
       "FirmwareExtension": "hex",
       "LatestFirmwareVersion": "0.0.1",
-      "FriendlyName": "Mobiflight Template Mega",
-      "MobiFlightType": "Mobiflight Template Mega",
+      "FriendlyName": "cgrau board1 Mega",
+      "MobiFlightType": "cgrau board1 Mega",
       "ResetFirmwareFile": "reset.arduino_mega_1_0_2.hex",
       "CustomDeviceTypes": [
-        "MOBIFLIGHT_TEMPLATE",
-        "MOBIFLIGHT_TEMPLATE2"
+        "board1",
+        "board12"
       ],
       "Community": {
         "Project": "Your Project",

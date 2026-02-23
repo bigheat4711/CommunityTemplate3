@@ -33,7 +33,6 @@ bool MFCustomDevice::getStringFromMem(uint16_t addrMem, char *buffer)
 {
     char     temp     = 0;
     uint8_t  counter  = 0;
-    uint16_t length   = MFeeprom.get_length();
     do {
             temp = pgm_read_byte_near(CustomDeviceConfig + addrMem++);
             if (addrMem > sizeof(CustomDeviceConfig))
@@ -71,7 +70,6 @@ void MFCustomDevice::attach(uint16_t adrPin, uint16_t adrType, uint16_t adrConfi
 
     char   *params, *p = NULL;
     char    parameter[MEMLEN_STRING_BUFFER];
-    uint8_t _pin1, _pin2, _pin3;
 
     /* **********************************************************************************
         Read the Type from the EEPROM or Flash, copy it into a buffer and evaluate it
@@ -101,11 +99,8 @@ void MFCustomDevice::attach(uint16_t adrPin, uint16_t adrType, uint16_t adrConfi
             multiple devices, it is done here.
         ********************************************************************************************** */
         params = strtok_r(parameter, "|", &p);
-        _pin1  = atoi(params);
         params = strtok_r(NULL, "|", &p);
-        _pin2  = atoi(params);
         params = strtok_r(NULL, "|", &p);
-        _pin3  = atoi(params);
 
         /* **********************************************************************************
             Read the configuration from the EEPROM or Flash, copy it into a buffer.
@@ -119,10 +114,8 @@ void MFCustomDevice::attach(uint16_t adrPin, uint16_t adrType, uint16_t adrConfi
             For most customer devices it is not required.
             In this case just delete the following
         ********************************************************************************** */
-        uint16_t Parameter1;
         char    *Parameter2;
         params     = strtok_r(parameter, "|", &p);
-        Parameter1 = atoi(params);
         params     = strtok_r(NULL, "|", &p);
         Parameter2 = params;
 
@@ -132,8 +125,8 @@ void MFCustomDevice::attach(uint16_t adrPin, uint16_t adrType, uint16_t adrConfi
         ********************************************************************************** */
         // In most cases you need only one of the following functions
         // depending on if the constuctor takes the variables or a separate function is required
-        _mydevice = new (allocateMemory(sizeof(board1))) board1(_pin1, _pin2);
-        _mydevice->attach(Parameter1, Parameter2);
+        _mydevice = new (allocateMemory(sizeof(board1))) board1();
+        _mydevice->attach(Parameter2);
         // if your custom device does not need a separate begin() function, delete the following
         // or this function could be called from the custom constructor or attach() function
         _mydevice->begin();

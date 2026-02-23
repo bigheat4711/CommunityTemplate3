@@ -7,19 +7,16 @@
     Change/add your code as needed.
 ********************************************************************************** */
 
-board1::board1(uint8_t Pin1, uint8_t Pin2)
+board1::board1()
 {
-    _pin1 = Pin1;
-    _pin2 = Pin2;
 }
 
 void board1::begin()
 {
 }
 
-void board1::attach(uint16_t Pin3, char *init)
+void board1::attach(char *init)
 {
-    _pin3 = Pin3;
 }
 
 void board1::detach()

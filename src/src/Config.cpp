@@ -200,36 +200,10 @@ void InitArrays(uint8_t *numberDevices)
         sendFailureMessage("Button");
     if (!Output::setupArray(numberDevices[kTypeOutput]))
         sendFailureMessage("Output");
-#ifdef MF_SEGMENT_SUPPORT
-    if (!LedSegment::setupArray(numberDevices[kTypeLedSegmentDeprecated] + numberDevices[kTypeLedSegmentMulti]))
-        sendFailureMessage("7Segment");
-#endif
-#ifdef MF_STEPPER_SUPPORT
-    if (!Stepper::setupArray(numberDevices[kTypeStepper] + numberDevices[kTypeStepperDeprecated1] + numberDevices[kTypeStepperDeprecated2]))
-        sendFailureMessage("Stepper");
-#endif
-#ifdef MF_SERVO_SUPPORT
-    if (!Servos::setupArray(numberDevices[kTypeServo]))
-        sendFailureMessage("Servo");
-#endif
+
     if (!Encoder::setupArray(numberDevices[kTypeEncoder] + numberDevices[kTypeEncoderSingleDetent]))
         sendFailureMessage("Encoders");
-#ifdef MF_LCD_SUPPORT
-    if (!LCDDisplay::setupArray(numberDevices[kTypeLcdDisplayI2C]))
-        sendFailureMessage("LCD");
-#endif
-#ifdef MF_OUTPUT_SHIFTER_SUPPORT
-    if (!OutputShifter::setupArray(numberDevices[kTypeOutputShifter]))
-        sendFailureMessage("OutputShifter");
-#endif
-#ifdef MF_INPUT_SHIFTER_SUPPORT
-    if (!InputShifter::setupArray(numberDevices[kTypeInputShifter]))
-        sendFailureMessage("InputShifter");
-#endif
-#ifdef MF_DIGIN_MUX_SUPPORT
-    if (!DigInMux::setupArray(numberDevices[kTypeDigInMux]))
-        sendFailureMessage("DigInMux");
-#endif
+
 #ifdef MF_CUSTOMDEVICE_SUPPORT
     if (!CustomDevice::setupArray(numberDevices[kTypeCustomDevice]))
         sendFailureMessage("CustomDevice");
